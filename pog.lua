@@ -46,3 +46,14 @@ spawn(function()
         task.wait(loopInterval * 60) -- Wait for the specified interval before the next check
     end
 end)
+
+spawn(function()
+    while true do
+        pcall(function()
+            game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Claim All"):InvokeServer()
+        end)
+        task.wait(600)
+    end
+end)
+
+
