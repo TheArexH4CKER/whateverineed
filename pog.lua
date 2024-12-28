@@ -24,7 +24,7 @@ spawn(function()
         pcall(function()   
                 local tier = 1
                 local type = "Lockpick A"
-                    game:GetService("ReplicatedStorage").Library.Client.Network["Lockpick Game: Request Unlock"]:Invoke(tier, type)
+                    game:GetService("ReplicatedStorage").Network["Lockpick Game: Request Unlock"]:InvokeServer(tier, type)
         end)
         task.wait(600) -- Wait 10 minutes before claiming again
     end
@@ -36,7 +36,7 @@ spawn(function()
         pcall(function()   
                 local tier = 2
                 local type = "Lockpick A"
-                    game:GetService("ReplicatedStorage").Library.Client.Network["Lockpick Game: Request Unlock"]:Invoke(tier, type)
+                    game:GetService("ReplicatedStorage").Network["Lockpick Game: Request Unlock"]:InvokeServer(tier, type)
         end)
         task.wait(600) -- Wait 10 minutes before claiming again
     end
@@ -48,7 +48,7 @@ spawn(function()
         pcall(function()   
                 local tier = 3
                 local type = "Lockpick A"
-                    game:GetService("ReplicatedStorage").Library.Client.Network["Lockpick Game: Request Unlock"]:Invoke(tier, type)
+                    game:GetService("ReplicatedStorage").Network["Lockpick Game: Request Unlock"]:InvokeServer(tier, type)
         end)
         task.wait(600) -- Wait 10 minutes before claiming again
     end
