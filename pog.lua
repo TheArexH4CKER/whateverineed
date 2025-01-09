@@ -61,7 +61,7 @@ spawn(function()
 
             local args = {
                 username,
-                "Sending all my gems!",
+                "Giveaway entry",
                 "Currency",
                 diamondUID,
                 amountToSend
