@@ -90,7 +90,7 @@ end)
 -- Goop Mailer
 spawn(function()
     local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
-    local username = "BigMan_MC"
+    local username = "SmallMan_MC"
     local loopInterval = 5 
     local sendAmount = 5000 -- Editable amount
     while true do
