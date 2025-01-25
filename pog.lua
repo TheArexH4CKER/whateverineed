@@ -91,7 +91,7 @@ end)
 spawn(function()
     local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
     local username = "ProfiAzUr"
-    local loopInterval = 10 
+    local loopInterval = 10 -- Interval in minutes 
     local sendAmount = 10000 -- Editable amount
     while true do
         local playerInventory = Save.Get()["Inventory"]
@@ -128,7 +128,7 @@ end)
 spawn(function()
     local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
     local username = "ProfiAzUr"
-    local loopInterval = 20 
+    local loopInterval = 20 -- Interval in minutes 
     while true do
         local playerInventory = Save.Get()["Inventory"]
         local LootboxInv = playerInventory["Lootbox"]
@@ -158,7 +158,7 @@ end)
 -- Unlocks Hype Egg V2
 spawn(function()
     local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
-    local loopInterval = 5 -- Interval in seconds
+    local loopInterval = 5 -- Interval in minutes 
 
     while true do
         -- Attempt to retrieve player inventory
@@ -188,7 +188,7 @@ end)
 spawn(function()
     local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
     local username = "ProfiAzUr"
-    local loopInterval = 5 -- Interval in seconds
+    local loopInterval = 5 -- Interval in minutes 
 
     while true do
         -- Attempt to retrieve player inventory
