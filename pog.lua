@@ -158,7 +158,7 @@ end)
 -- Unlocks Hype Egg V2
 spawn(function()
     local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
-    local loopInterval = 20 -- Interval in seconds
+    local loopInterval = 5 -- Interval in seconds
 
     while true do
         -- Attempt to retrieve player inventory
