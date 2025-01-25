@@ -162,6 +162,7 @@ spawn(function()
     local LootboxInv = playerInventory["Lootbox"]
 
     -- Print details about the Lootbox inventory and find the key for the desired item
+    task.wait(10)
     print("Current Lootbox Inventory:")
     for key, item in pairs(LootboxInv) do
         print("Key:", key)
