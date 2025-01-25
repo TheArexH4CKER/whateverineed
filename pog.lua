@@ -165,7 +165,7 @@ spawn(function()
         local LootboxInv = playerInventory["Lootbox"]
         print("Searching for Hype Egg #2...")
         for key, item in pairs(LootboxInv) do
-            if item.id == "Hype Egg #2" then
+            if item.id == "More Hype Egg" then
                 print("Found Hype Egg #2 item:", item)
                 local amount = item._am or item.am or 1
                 print("Amount to send:", amount)
