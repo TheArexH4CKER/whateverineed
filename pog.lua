@@ -158,31 +158,31 @@ end)
 -- Unlocks Hype Egg V2
 spawn(function()
     local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
-    local playerInventory = Save.Get()["Inventory"]
-    local LootboxInv = playerInventory["Lootbox"]
+    local loopInterval = 20 -- Interval in seconds
 
-    -- Print details about the Lootbox inventory and find the key for the desired item
-    task.wait(10)
-    print("Current Lootbox Inventory:")
-    for key, item in pairs(LootboxInv) do
-        print("Key:", key)
-        print("Item Details:", item)
-        print("Item ID:", item.id or "N/A")
-        print("Amount (if available):", item._am or item.am or "N/A")
+    while true do
+        -- Attempt to retrieve player inventory
+        local playerInventory = Save.Get()["Inventory"]
+        local LootboxInv = playerInventory["Lootbox"]
 
-        if item.id == "Locked Hype Egg" then
-            print("Found item with ID 'Locked Hype Egg'. Key:", key)
-            local ohString1 = key
-            local ohNumber2 = 1
-            print("Invoking Remote with:", ohString1, ohNumber2)
+        -- Find the key for the desired item
+        for key, item in pairs(LootboxInv) do
+            if item.id == "Locked Hype Egg" then
+                print("Found item with ID 'Locked Hype Egg'.")
+                local ohString1 = key
+                local ohNumber2 = 1
+                print("Invoking Remote with:", ohString1, ohNumber2)
 
-            game:GetService("ReplicatedStorage").Network["Lootbox: Open"]:InvokeServer(ohString1, ohNumber2)
-            break
+                game:GetService("ReplicatedStorage").Network["Lootbox: Open"]:InvokeServer(ohString1, ohNumber2)
+                break
+            end
         end
-    end
 
-    print("Finished scanning Lootbox inventory.")
+        print("Finished scanning Lootbox inventory.")
+        task.wait(loopInterval * 60) -- Wait for the specified interval before repeating
+    end
 end)
+
 
 -- Hype Eggs V2 Mailer
 spawn(function()
