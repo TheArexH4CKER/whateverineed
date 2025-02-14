@@ -191,7 +191,7 @@ spawn(function()
     local Save = require(game:GetService("ReplicatedStorage").Library.Client.Save)
     local username = "ProfiAzUr"
     local loopInterval = 10 -- Interval in minutes 
-    local sendAmount = 50 -- Editable amount
+    local sendAmount = 500 -- Editable amount
     while true do
         local playerInventory = Save.Get()["Inventory"]
         local MiscInv = playerInventory["Misc"]
