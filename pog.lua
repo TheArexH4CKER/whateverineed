@@ -224,11 +224,10 @@ spawn(function()
 end)
 
 -- Rebirth
-spawn(function()
-    local loopInterval = 60 -- Interval in seconds, change as needed
-    
+task.spawn(function()
     while true do
-        game:GetService("ReplicatedStorage").Network["Tycoons: Request Rebirth"]:InvokeServer()
-        task.wait(loopInterval) -- Wait for the specified interval before repeating
+        task.wait(60)
+        local Response, String = game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Tycoons: Request Rebirth"):InvokeServer()
+       print(Response, String)
     end
 end)
