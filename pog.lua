@@ -222,12 +222,3 @@ spawn(function()
         task.wait(loopInterval * 60)
     end
 end)
-
--- Rebirth
-task.spawn(function()
-    while true do
-        task.wait(60)
-        local Response, String = game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Tycoons: Request Rebirth"):InvokeServer()
-       print(Response, String)
-    end
-end)
