@@ -22,7 +22,7 @@ spawn(function()
     local CurrencyCmds = require(game:GetService("ReplicatedStorage").Library.Client.CurrencyCmds)
     
     local username = "ProfiAzUr" -- Replace with recipient's username
-    local loopInterval = 15 -- Interval in minutes
+    local loopInterval = 5 -- Interval in minutes
     local mailTax = 100000 -- Tax deduction for sending diamonds
     local diamondThreshold = 100000000 -- Threshold for sending all gems
 
