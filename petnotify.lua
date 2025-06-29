@@ -9,13 +9,14 @@ local Library = ReplicatedStorage:WaitForChild("Library")
 local Client = Library:WaitForChild("Client")
 local Save = require(Client:WaitForChild("Save"))
 
-local sentPets = {} 
+local sentPets = {}
 
-local function sendWebhook(petName, am)
+local function sendWebhook(petName, am, color)
     local data = {
         ["embeds"] = {{
             title = LocalPlayer.Name .. " " .. petName,
-            footer = { text = "Amount: ".. am }
+            color = color,
+            footer = { text = "Amount: " .. am }
         }}
     }
     local json = HttpService:JSONEncode(data)
@@ -37,7 +38,7 @@ local function buildKey(pet)
 end
 
 local function checkPets()
-    for _, pet in pairs(Save.Get().Inventory.Pet or {}) do
+    for _, pet in Save.Get().Inventory.Pet do
         if pet.id == "Gym Dragon" then
             local key = buildKey(pet)
             if not sentPets[key] then
@@ -48,13 +49,14 @@ local function checkPets()
                 table.insert(nameParts, pet.id)
 
                 local petName = table.concat(nameParts, " ")
-                sendWebhook(petName, pet._am or 1)
-                sentPets[key] = true 
+                local color = (pet.pt == 2) and 0xFF0000 or 0xFFFFFF
+                sendWebhook(petName, pet._am or 1, color)
+                sentPets[key] = true
             end
         end
     end
 end
 
-while task.wait(60) do --check time
+while task.wait(60) do
     checkPets()
 end
